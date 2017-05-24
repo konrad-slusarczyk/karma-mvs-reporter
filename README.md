@@ -5,7 +5,7 @@
 
 ## How does it look like?
 
-###Error List:
+Error List:
 ![screenshot](img/ErrorList.bmp)
 
 ## Installation
