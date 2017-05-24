@@ -27,3 +27,15 @@ configure in `karma.conf.js` the new reporter:
         ...
         });
       };
+
+run the tests eq `gulp.file.js` : 
+
+	gulp.task("tests", function (done) {
+		var karma = require('karma').Server;
+		karma.start({
+			configFile: __dirname + '/karma.conf.js',
+			singleRun: true
+		}, function (karmaResult) {
+			done();
+		});
+	});
