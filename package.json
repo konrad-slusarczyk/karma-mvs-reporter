@@ -1,0 +1,35 @@
+{
+  "name": "karma-vs-reporter",
+  "version": "0.0.1",
+  "homepage": "https://github.com/konrad-slusarczyk/karma-vs-reporter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konrad-slusarczyk/karma-vs-reporter"
+  },
+  "description": "Karma plugin that reports to Visual Studio Error List.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "karma-plugin",
+    "karma-reporter",
+    "visual studio",
+    "vs",
+    "karma"
+  ],
+  "author": {
+    "name": "Konrad Œlusarczyk"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0"
+  },
+  "peerDependencies": {
+    "karma": ">=0.10"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
