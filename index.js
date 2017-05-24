@@ -2,7 +2,6 @@ var fs = require('fs');
 var chalk = require('chalk');
 var path = require('path');
 
-
 var VisualStudioReporter = function (baseReporterDecorator, config, logger, formatError) {//function (formatError, logger) {
     
     baseReporterDecorator(this);
@@ -59,13 +58,9 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
 
     this.onSpecComplete = function (browser, result) {
 
-        //console.log('karma-vs-reporter: specComplete, broser' + browser + ', results ' + JSON.stringify(result, null, 2));
-
         var path = [].concat(result.suite, result.description);
         var pathStr = path.join(" >> ");
-
         
-
         // Only log Errors
         if (result.skipped) {
             skippedCount++;
@@ -109,15 +104,7 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
             });
         }
     };
-
-    //this.onBrowserError = function (broser, error) {
-    //    console.log('karma-vs-reporter: browserError, broser' + browser + ', results ' + JSON.stringify(result, null, 2));
-    //}
-
-    this.onRunComplete = function (browsers, results) {
-        console.log('karma-vs-reporter: failed tests: ' + failCount);
-        console.log(vsReporterConfig.base);
-    };
+    
 };
 
 // inject karma runner baseReporter and config

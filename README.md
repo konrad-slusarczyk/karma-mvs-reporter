@@ -6,7 +6,7 @@
 ## How does it look like?
 
 ###Error List:
-![screenshot](img/ErrorList.png)
+![screenshot](img/ErrorList.bmp)
 
 ## Installation
 First install and configure karma, then install the karma-mvs-reporter
