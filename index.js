@@ -10,7 +10,7 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
 
     var reporterConfig = config.mvsReporter || {};
 
-    var baseDir = reporterConfig.baseDri || "./";
+    var baseDir = reporterConfig.baseDir || "./";
     var errorLogLevel = getLogLevel(reporterConfig.logErrorAs);
     var failLogLevel = getLogLevel(reporterConfig.logFailAs);
 
