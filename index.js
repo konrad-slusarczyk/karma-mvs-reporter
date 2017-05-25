@@ -19,7 +19,7 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
     }];
 
     function formatVsOutput(type, file, line, col, message, code, program) {
-        var vsLine = (program ? program + ":" : "") + file;
+        var vsLine = (program ? program + ":" : "") + file.replace(/\//g, '\\');
         if (line) {
             vsLine += "(" + line;
             if (col) { vsLine += "," + col; }
