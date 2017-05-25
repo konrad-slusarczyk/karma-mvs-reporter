@@ -22,7 +22,9 @@ configure in `karma.conf.js` the new reporter:
         ...
         reporters: ['mvs'],
 		mvsReporter: {
-			baseDir: "./" 
+			baseDir: "./",
+			logErrorAs: 'error',
+			logFailAs: isTfs ? 'error' : 'warning'
 		}
         ...
         });

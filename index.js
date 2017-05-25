@@ -11,6 +11,8 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
     var reporterConfig = config.mvsReporter || {};
 
     var baseDir = reporterConfig.baseDri || "./";
+    var errorLogLevel = getLogLevel(reporterConfig.logErrorAs);
+    var failLogLevel = getLogLevel(reporterConfig.logFailAs);
 
     this.adapters = [function (msg) {
         process.stdout.write.bind(process.stdout)(msg + "rn");
@@ -52,6 +54,12 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
         //log.info(chalk.green(message));
     }
 
+    function getLogLevel(setting, def) {
+        def = def || 'error';
+        if (setting !== 'error' && setting !== 'warning') return def;
+        return setting;
+    }
+
     var skippedCount = 0;
     var failCount = 0;
     var successCount = 0;
@@ -87,12 +95,23 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
                     var msg;
                         
                     if (isError) { // in test error
-                        msg = errorMsg[0].substring(msgTypeSepIdx + 1).trim();
-                    } else { // test fail
-                        msg = errorMsg[0].trim();
-                    }
 
-                    logVsErrorMessage(file, line, col, msg);
+                        msg = errorMsg[0].substring(msgTypeSepIdx + 1).trim();
+                        if (errorLogLevel === 'error')
+                            logVsErrorMessage(file, line, col, msg);
+                        else
+                            logVsWarningMessage(file, line, col, msg);
+
+                    } else { // test fail
+
+                        msg = errorMsg[0].trim();
+                        if (failLogLevel === 'error')
+                            logVsErrorMessage(file, line, col, msg);
+                        else
+                            logVsWarningMessage(file, line, col, msg);
+
+                    }
+                    
                     
 
                 } catch (e) {
