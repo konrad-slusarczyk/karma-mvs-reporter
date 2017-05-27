@@ -24,7 +24,8 @@ configure in `karma.conf.js` the new reporter:
 		mvsReporter: {
 			baseDir: "./",
 			logErrorAs: 'error',
-			logFailAs: isTfs ? 'error' : 'warning'
+			logFailAs: isTfs ? 'error' : 'warning',
+			messageFormat: '{message} [{browser}] ({specSuite} {specDescription})' //defult. '{message} [{browser}]'
 		}
         ...
         });
