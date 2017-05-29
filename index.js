@@ -8,9 +8,17 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
 
     var log = logger.create('reporter.vs');
 
+
+
     var reporterConfig = config.mvsReporter || {};
 
-    var baseDir = reporterConfig.baseDir || "./";
+    console.log(JSON.stringify(config, null, 2));
+
+    var baseDir = reporterConfig.baseDir || config.basePath + "/";
+    baseDir = baseDir.trim();
+    if (baseDir.indexOf('./') === 0) baseDir.replace('./', config.basePath + "/");
+    else if (baseDir.indexOf('.\\') === 0) baseDir.replace('.\\', config.basePath + "/");
+
     var errorLogLevel = getLogLevel(reporterConfig.logErrorAs);
     var failLogLevel = getLogLevel(reporterConfig.logFailAs);
     var msgFormat = typeof reporterConfig.messageFormat === 'string' && reporterConfig.messageFormat.length > 0 ?
