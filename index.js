@@ -15,7 +15,7 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
     var failLogLevel = getLogLevel(reporterConfig.logFailAs);
     var msgFormat = typeof reporterConfig.messageFormat === 'string' && reporterConfig.messageFormat.length > 0 ?
         reporterConfig.messageFormat.replace(/:/g, ' ').replace(/\n/g, '\\n') :
-        '{message} [{browser}] ({specSuite} {specDescription})'
+        '{message} [{browser}] ({specSuite} {specDescription})';
 
     //this.adapters = [function (msg) {
     //    process.stdout.write.bind(process.stdout)(msg + "rn");
@@ -140,13 +140,14 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
     var failCount = 0;
     var successCount = 0;
 
-    fs.writeFileSync('./bin/karama-mvs-reporter.log.txt', '');
+    //fs.writeFileSync('./bin/karama-mvs-reporter.log.txt', '');
 
     this.onSpecComplete = function (browser, result) {
 
         var path = [].concat(result.suite, result.description);
         var pathStr = path.join(" >> ");
         var browserId = getBrowserId(browser);
+
         // Only log Errors
         if (result.skipped) {
             skippedCount++;
@@ -156,14 +157,14 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
         } else {
             logError(pathStr + " TEST FAILED");
 
-            fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', pathStr + " TEST FAILED\n" + JSON.stringify(browser, null,1) + '\n');
-            fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '----\n' + JSON.stringify(result, null, 2) + "\n-----\n");
+            //fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', pathStr + " TEST FAILED\n" + JSON.stringify(browser, null,1) + '\n');
+            //fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '----\n' + JSON.stringify(result, null, 2) + "\n-----\n");
             failCount++;
             result.log.forEach(function (log, idx) {
 
                 try {
                     var errorMsg = formatError(log).trim();
-                    fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '--\n' + errorMsg + '\n--\n');
+                    //fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '--\n' + errorMsg + '\n--\n');
 
                     var msgTypeSepIdx = errorMsg.indexOf(':');
                     var errType = errorMsg.substring(0, msgTypeSepIdx).trim().toLowerCase();
@@ -172,7 +173,7 @@ var VisualStudioReporter = function (baseReporterDecorator, config, logger, form
                     
                     var fileInfo = findFileRef(errorMsg, browserId);
 
-                    fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '-fi-\n' + JSON.stringify(fileInfo, null, 2) + '\n-fi-\n');
+                    //fs.appendFileSync('./bin/karama-mvs-reporter.log.txt', '-fi-\n' + JSON.stringify(fileInfo, null, 2) + '\n-fi-\n');
 
                     
                     var msg = errorMsg.split('\n')[0]; // split by line
