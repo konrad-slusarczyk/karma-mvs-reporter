@@ -20,7 +20,7 @@ configure in `karma.conf.js` the new reporter:
     module.exports = function(config) {
       config.set({
         ...
-        reporters: ['mvs'],
+        reporters: ['mvs'], 
 		mvsReporter: {
 			baseDir: "./",
 			logErrorAs: 'error',
@@ -31,7 +31,7 @@ configure in `karma.conf.js` the new reporter:
         });
       };
 
-run the tests eq `gulp.file.js` : 
+run the tests eq. from gulp `gulp.file.js` : 
 
 	gulp.task("tests", function (done) {
 		var karma = require('karma').Server;
